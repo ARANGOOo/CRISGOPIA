@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRISGOPIA - El Regalo de la Tecnología</title>
+    <!-- Fuente moderna desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- VARIABLES DE COLOR (SACADAS DEL LOGO) --- */
+        :root {
+            --bg-principal: #000000;      /* Fondo Negro Profundo */
+            --bg-secundario: #111111;    /* Fondo ligeramente más claro */
+            --cian: #00AEEF;            /* Azul Cian del Logo */
+            --texto-claro: #FFFFFF;     /* Texto Blanco */
+            --texto-oscuro: #888888;
+            --fuente-titulos: 'Montserrat', sans-serif;
+            --fuente-cuerpo: 'Poppins', sans-serif;
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--fuente-cuerpo);
+            background-color: var(--bg-principal);
+            color: var(--texto-claro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        h1, h2, h3 { font-family: var(--fuente-titulos); }
+
+        /* --- HEADER Y NAVEGACIÓN --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--cian);
+        }
+
+        .logo-container img { height: 60px; } /* Ajuste de altura del logo */
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover { color: var(--cian); }
+
+        /* --- SECCIÓN HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                radial-gradient(circle at 70% 30%, rgba(0, 174, 239, 0.15), transparent 40%),
+                linear-gradient(180deg, #000000 0%, #111111 100%);
+            padding: 0 10%;
+            position: relative;
+        }
+
+        /* Decoración circular de fondo */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            border: 2px solid rgba(0, 174, 239, 0.1);
+            border-radius: 50%;
+            top: -100px; left: -100px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content h1 span { color: var(--cian); }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        /* Botón CTA Creativo */
+        .btn-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--cian);
+            color: var(--bg-principal);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(0, 174, 239, 0.4);
+            animation: fadeInUp 1s ease 0.8s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cta::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 20%; height: 200%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: rotate(30deg);
+            transition: 0.5s;
+        }
+
+        .btn-cta:hover::after { left: 120%; }
+        .btn-cta:hover { box-shadow: 0 8px 30px rgba(0, 174, 239, 0.6); }
+
+        /* --- SECCIÓN SERVICIOS --- */
+        .seccion { padding: 100px 10%; background-color: var(--bg-secundario); }
+
+        .seccion-titulo {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+        }
+        .seccion-titulo span { border-bottom: 3px solid var(--cian); }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* Tarjetas "Regalo" que se revelan */
+        .card-servicio {
+            background-color: var(--bg-principal);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #222;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-servicio::before {
+            content: '🎁'; /* Icono de regalo sutil */
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            transition: 0.3s;
+        }
+
+        .card-servicio:hover {
+            transform: translateY(-10px);
+            border-color: var(--cian);
+            box-shadow: 0 15px 40px rgba(0, 174, 239, 0.15);
+        }
+
+        .card-servicio:hover::before { opacity: 0.8; }
+
+        .card-servicio h3 {
+            color: var(--cian);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .card-servicio p { color: var(--texto-oscuro); }
+
+        /* --- SECCIÓN CONTACTO --- */
+        .contacto {
+            padding: 100px 10%;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secundario) 0%, var(--bg-principal) 100%);
+        }
+
+        .contacto h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .contacto p { color: var(--texto-oscuro); margin-bottom: 40px; }
+
+        .btn-contacto {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid var(--cian);
+            color: var(--cian);
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .btn-contacto:hover {
+            background-color: var(--cian);
+            color: var(--bg-principal);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px 10%;
+            text-align: center;
+            border-top: 1px solid #222;
+            background-color: #080808;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Navegación simplificada para móvil */
+            header { padding: 15px 5%; }
+            .seccion { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header>
+        <div class="logo-container">
+            <!-- REEMPLAZA 'logo.png' CON TU IMAGEN DEL LOGO -->
+            <img src="logo.png" alt="CRISGOPIA - El Regalo de la Tecnología">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>CRISGOPIA.<br><span>El Regalo</span> de la Tecnología.</h1>
+            <p>Descubre soluciones digitales innovadoras que superan tus expectativas. Creamos experiencias que sorprenden y transforman.</p>
+            <a href="#servicios" class="btn-cta">Descubrir Soluciones</a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN SERVICIOS -->
+    <section id="servicios" class="seccion">
+        <h2 class="seccion-titulo"><span>Nuestros Servicios</span></h2>
+        
+        <div class="servicios-grid">
+            <div class="card-servicio">
+                <h3>Diseño Web</h3>
+                <p>Interfaces impactantes que capturan la esencia de tu marca, diseñadas para convertir.</p>
+            </div>
+            <div class="card-servicio">
+                <h3>Desarrollo</h3>
+                <p>Código sólido y escalable que da vida a tus ideas más ambiciosas y complejas.</p>
+            </div>
+            <div class="card-servicio">
+                <h3>Innovación</h3>
+                <p>Estrategias digitales que te posicionan a la vanguardia, siempre un paso adelante.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto" class="contacto">
+        <h2>¿Listo para abrir tu regalo?</h2>
+        <p>Cuéntanos tu proyecto y te sorprenderemos con nuestra propuesta.</p>
+        <a href="mailto:info@crisgopia.io" class="btn-contacto">Contactar Ahora</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2023 CRISGOPIA. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
